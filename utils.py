@@ -101,7 +101,7 @@ class Player:
         rd.shuffle(choices)
         values = [self.tree.act2value[(idx,_id)] for _id in choices]
 
-        print(values)
+        #print(values)
 
         if rd.random() < eps:
             step = rd.sample(choices,1)[0]
@@ -109,7 +109,7 @@ class Player:
             step = choices[values.index(max(values))]
 
         board.state = np.array(self.tree.idx2state[step]).reshape((3,3))
-        board.display()
+        board.judge()
 
         return idx,step
 
@@ -119,3 +119,9 @@ class Player:
 
         for idx,step in seq:
             self.tree.act2value[(idx,step)] += lr * ((ret * (0.9 ** (len(seq)))) - self.tree.act2value[(idx,step)])
+
+    def save(self):
+        pass
+
+    def load(self):
+        pass

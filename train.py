@@ -7,7 +7,7 @@ from utils import *
 player1 = Player()
 player2 = Player()
 
-num_iter = 1000000
+num_iter = 50000
 
 black_win = 0
 draw = 0
@@ -41,4 +41,26 @@ for i in range(num_iter):
 	player1.learn(p1,lr=0.1)
 	player2.learn(p2,lr=0.1)
 
-	print('black win %.2f, white win %.2f, draw %.2f'%(black_win/(i+1), white_win/(i+1), draw/(i+1)))
+	print('iter %d black win %.2f, white win %.2f, draw %.2f'%(i,black_win/(i+1), white_win/(i+1), draw/(i+1)))
+
+while True:
+	print('===Play with QiaoAI===')
+	print('You are white.')
+
+	board = Board()
+	while True:
+		if board.cont:
+			player1.play(board,eps=0)
+			board.display()
+		else:
+			board.display()
+			break
+
+		if board.cont:
+			row = int(input('row: ')) - 1
+			column = int(input('column: ')) -1
+			board.state[row,column] = -1
+			board.display()
+		else:
+			board.display()
+			break

@@ -17,18 +17,18 @@ for i in range(num_iter):
 
 	while True:
 		if board.cont:
-			p1[0].append(player1.play(board,eps=1/num_iter))
+			p1[0].append(player1.play(board,eps=1/i))
 		else:
 			p1.append(board.win)
 			p2.append(-board.win)
 			break
 
 		if board.cont:
-			p2[0].append(player2.play(board,eps=0.1/num_iter))
+			p2[0].append(player2.play(board,eps=0.1/i))
 		else:
 			p1.append(board.win)
 			p2.append(-board.win)
 			break
 
 	player1.learn(p1,lr=0.1)
-	player2.learn(p2,lr=0)
+	player2.learn(p2,lr=0.1)

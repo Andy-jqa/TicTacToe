@@ -98,10 +98,12 @@ class Player:
 
         idx = self.tree.state2idx[tuple(board.state.reshape((9)))]
         choices = self.tree.idx2child[idx]
+        rd.shuffle(choices)
         values = [self.tree.act2value[(idx,_id)] for _id in choices]
+
         print(values)
 
-        if rd.random() < eps or max(values)==0:
+        if rd.random() < eps:
             step = rd.sample(choices,1)[0]
         else:
             step = choices[values.index(max(values))]
